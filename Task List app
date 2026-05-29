@@ -1,0 +1,41 @@
+tasks = []
+def TaskManager(value):
+    valueadjusted = value.lower().strip()
+    if(valueadjusted == "add") or (valueadjusted == "1"):
+        added = input("Enter the task: ").strip()
+        if not added:
+            return "Enter a valid task"
+        else:
+            tasks.append(added)
+            return "Task has been added"
+    elif(valueadjusted == "remove") or (valueadjusted == "2"):
+        if not tasks:
+            return "Your task list is currently empty."
+        removed = input("Which task would you like to remove?: ").strip().lower()
+        for task in tasks:
+            if task.lower() == removed:
+                tasks.remove(task)
+                return f"'{task}' has been removed."
+        return "Task does not exist"
+    elif(valueadjusted == "view") or (valueadjusted == "3"):
+        if not tasks:
+            return "Your task list is empty."
+        formatted_tasks = "\n".join(f"- {task}" for task in tasks)
+        return f"\nYour Tasks:\n{formatted_tasks}"
+    elif(valueadjusted == "exit"):
+        return "exit"
+    else:
+        return "Invalid request. Please type Add, Remove, View, or Exit."
+
+print("Welcome to Task Manager!")  
+while True:
+    print("\n-------------------------")
+    action = input("What would you like to do?\n 1. Add\n 2. Remove\n 3. View\n Type 'Exit' to close\n> ")
+    
+    result = TaskManager(action)
+    
+    if result == "exit":
+        print("Goodbye!")
+        break
+        
+    print(result)
